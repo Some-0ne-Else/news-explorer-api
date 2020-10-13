@@ -1,0 +1,50 @@
+{
+  "name": "news-explorer-api",
+  "version": "1.0.0",
+  "description": "diploma project for Yandex Praktikum",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm run test",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Some-0ne-Else/news-explorer-api.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write './**/*.{js,css}' && git add ."
+    }
+  },
+  "keywords": [
+    "api",
+    "news",
+    "explorer"
+  ],
+  "author": "Some0neElse cyber-def@yandex.ru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Some-0ne-Else/news-explorer-api/issues"
+  },
+  "homepage": "https://github.com/Some-0ne-Else/news-explorer-api#readme",
+  "devDependencies": {
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "husky": "^4.3.0",
+    "nodemon": "^2.0.5",
+    "prettier": "^2.1.2"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "celebrate": "^13.0.3",
+    "express": "^4.17.1",
+    "express-winston": "^4.0.5",
+    "joi": "^17.2.1",
+    "mongoose": "^5.10.9",
+    "validator": "^13.1.17",
+    "winston": "^3.3.3"
+  }
+}
