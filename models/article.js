@@ -21,8 +21,8 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      // eslint-disable-next-line no-useless-escape
       validator(str) {
+        // eslint-disable-next-line no-useless-escape
         return str.match(/https?:\/\/[a-zA-Z0-9\/.\-]+\.+[a-zA-Z0-9\/.-]+#?/g);
       },
     },
@@ -32,8 +32,8 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      // eslint-disable-next-line no-useless-escape
       validator(str) {
+        // eslint-disable-next-line no-useless-escape
         return str.match(/https?:\/\/[a-zA-Z0-9\/.\-]+\.+[a-zA-Z0-9\/.-]+#?/g);
       },
     },
