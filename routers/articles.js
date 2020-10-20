@@ -45,10 +45,18 @@ router.post(
       })
       .unknown(true),
     body: Joi.object().keys({
-      name: Joi.string().required().min(2).max(30),
+      keyword: Joi.string().required(),
+      title: Joi.string().required(),
+      text: Joi.string().required(),
+      date: Joi.string().required(),
+      source: Joi.string().required(),
+      // eslint-disable-next-line no-useless-escape
       link: Joi.string()
         .required()
-        // eslint-disable-next-line no-useless-escape
+        .pattern(/https?:\/\/[a-zA-Z0-9\/.\-]+\.+[a-zA-Z0-9\/.-]+#?/),
+      // eslint-disable-next-line no-useless-escape
+      image: Joi.string()
+        .required()
         .pattern(/https?:\/\/[a-zA-Z0-9\/.\-]+\.+[a-zA-Z0-9\/.-]+#?/),
     }),
   }),

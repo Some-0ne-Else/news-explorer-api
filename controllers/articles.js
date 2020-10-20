@@ -4,19 +4,19 @@ const BadRequestError = require('../errors/bad-request-err');
 const ForbiddenError = require('../errors/forbidden-err');
 
 module.exports.getArticles = (req, res, next) => {
-  Article.find({})
+  Article.find({ owner: req.user._id })
     .then((articles) => res.send({ data: articles }))
     .catch(next);
 };
 
 module.exports.deleteArticle = (req, res, next) => {
   Article.findById(req.params.id)
+    .populate('owner')
     .then((article) => {
       if (!article) {
         throw new NotFoundError('Статья не найдена');
       }
-
-      if (article.owner.toString() === req.user._id) {
+      if (article.owner._id.toString() === req.user._id) {
         return Article.findByIdAndRemove(req.params.id).then((a) =>
           res.send({ data: a }),
         );
@@ -33,11 +33,12 @@ module.exports.deleteArticle = (req, res, next) => {
 };
 
 module.exports.addArticle = (req, res, next) => {
-  const { keyword, title, date, source, link, image } = req.body;
+  const { keyword, title, text, date, source, link, image } = req.body;
   const userId = req.user._id;
   Article.create({
     keyword,
     title,
+    text,
     date,
     source,
     link,

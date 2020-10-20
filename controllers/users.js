@@ -1,19 +1,17 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const NotFoundError = require('../errors/not-found-err');
 const BadRequestError = require('../errors/bad-request-err');
 const ConflictError = require('../errors/conflict-err');
 
 const { JWT_SECRET = 'yandex-praktikum-key' } = process.env;
 
-module.exports.getUserById = (req, res, next) => {
-  User.findById(req.params.id)
+module.exports.getUserInfo = (req, res, next) => {
+  const userId = req.user._id;
+  User.find({ _id: userId })
     .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Нет пользователя с таким id');
-      }
-      return res.send({ data: user });
+      // sending only required data
+      res.send({ data: { email: user[0].email, name: user[0].name } });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -25,21 +23,18 @@ module.exports.getUserById = (req, res, next) => {
 };
 
 module.exports.createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const email = req.body.email.toLowerCase();
+  const { password, name } = req.body;
   bcrypt.hash(password, 10).then((hash) => {
     User.create({
-      name,
-      about,
-      avatar,
       email,
       password: hash,
+      name,
     })
       .then(() =>
         res.send({
-          name,
-          about,
-          avatar,
           email,
+          name,
         }),
       )
       .catch((err) => {
@@ -59,7 +54,8 @@ module.exports.createUser = (req, res, next) => {
   });
 };
 module.exports.login = (req, res, next) => {
-  const { email, password } = req.body;
+  const email = req.body.email.toLowerCase();
+  const { password } = req.body;
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
