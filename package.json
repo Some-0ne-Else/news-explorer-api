@@ -14,7 +14,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "prettier --write './**/*.{js,css}' && git add ."
+      "pre-commit": "prettier --write './**/*.{,css}' && git add ."
     }
   },
   "keywords": [
