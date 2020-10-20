@@ -17,9 +17,7 @@ module.exports.deleteArticle = (req, res, next) => {
         throw new NotFoundError('Статья не найдена');
       }
       if (article.owner._id.toString() === req.user._id) {
-        return Article.findByIdAndRemove(req.params.id).then((a) =>
-          res.send({ data: a }),
-        );
+        return Article.findByIdAndRemove(req.params.id).then((a) => res.send({ data: a }));
       }
       throw new ForbiddenError('Статья принадлежит другому пользователю');
     })
@@ -33,7 +31,9 @@ module.exports.deleteArticle = (req, res, next) => {
 };
 
 module.exports.addArticle = (req, res, next) => {
-  const { keyword, title, text, date, source, link, image } = req.body;
+  const {
+    keyword, title, text, date, source, link, image,
+  } = req.body;
   const userId = req.user._id;
   Article.create({
     keyword,

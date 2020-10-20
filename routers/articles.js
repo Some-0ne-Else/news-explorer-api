@@ -50,13 +50,14 @@ router.post(
       text: Joi.string().required(),
       date: Joi.string().required(),
       source: Joi.string().required(),
-      // eslint-disable-next-line no-useless-escape
       link: Joi.string()
         .required()
-        .pattern(/https?:\/\/[a-zA-Z0-9\/.\-]+\.+[a-zA-Z0-9\/.-]+#?/),
       // eslint-disable-next-line no-useless-escape
+        .pattern(/https?:\/\/[a-zA-Z0-9\/.\-]+\.+[a-zA-Z0-9\/.-]+#?/),
+
       image: Joi.string()
         .required()
+      // eslint-disable-next-line no-useless-escape
         .pattern(/https?:\/\/[a-zA-Z0-9\/.\-]+\.+[a-zA-Z0-9\/.-]+#?/),
     }),
   }),

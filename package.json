@@ -14,7 +14,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "prettier --write './**/*.{,css}' && git add ."
+      "pre-commit": "npx eslint ./",
+      "pre-commit_off": "prettier --write './**/*.{js,css}' && git add ."
     }
   },
   "keywords": [

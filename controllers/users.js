@@ -31,12 +31,10 @@ module.exports.createUser = (req, res, next) => {
       password: hash,
       name,
     })
-      .then(() =>
-        res.send({
-          email,
-          name,
-        }),
-      )
+      .then(() => res.send({
+        email,
+        name,
+      }))
       .catch((err) => {
         if (err.code === 11000) {
           throw new ConflictError(
