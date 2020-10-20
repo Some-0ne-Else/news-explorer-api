@@ -1,7 +1,7 @@
-const Article = require("../models/article");
-const NotFoundError = require("../errors/not-found-err");
-const BadRequestError = require("../errors/bad-request-err");
-const ForbiddenError = require("../errors/forbidden-err");
+const Article = require('../models/article');
+const NotFoundError = require('../errors/not-found-err');
+const BadRequestError = require('../errors/bad-request-err');
+const ForbiddenError = require('../errors/forbidden-err');
 
 module.exports.getArticles = (req, res, next) => {
   Article.find({})
@@ -13,7 +13,7 @@ module.exports.deleteArticle = (req, res, next) => {
   Article.findById(req.params.id)
     .then((article) => {
       if (!article) {
-        throw new NotFoundError("Статья не найдена");
+        throw new NotFoundError('Статья не найдена');
       }
 
       if (article.owner.toString() === req.user._id) {
@@ -21,11 +21,11 @@ module.exports.deleteArticle = (req, res, next) => {
           res.send({ data: a })
         );
       }
-      throw new ForbiddenError("Статья принадлежит другому пользователю");
+      throw new ForbiddenError('Статья принадлежит другому пользователю');
     })
     .catch((err) => {
-      if (err.name === "CastError") {
-        throw new BadRequestError("Передан некорректный идентификатор");
+      if (err.name === 'CastError') {
+        throw new BadRequestError('Передан некорректный идентификатор');
       }
       next(err);
     })
@@ -46,7 +46,7 @@ module.exports.addArticle = (req, res, next) => {
   })
     .then((user) => res.send({ data: user }))
     .catch((err) => {
-      if (err.name === "ValidationError") {
+      if (err.name === 'ValidationError') {
         throw new BadRequestError(
           `Переданы некорректные данные: ${err.message}`
         );

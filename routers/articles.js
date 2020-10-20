@@ -1,14 +1,14 @@
-const router = require("express").Router();
-const { celebrate, Joi } = require("celebrate");
-const auth = require("../middlewares/auth");
+const router = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
+const auth = require('../middlewares/auth');
 const {
   getArticles,
   addArticle,
   deleteArticle,
-} = require("../controllers/articles");
+} = require('../controllers/articles');
 
 router.get(
-  "/",
+  '/',
   celebrate({
     headers: Joi.object()
       .keys({
@@ -21,7 +21,7 @@ router.get(
 );
 
 router.delete(
-  "/:id",
+  '/:id',
   celebrate({
     headers: Joi.object()
       .keys({
@@ -37,7 +37,7 @@ router.delete(
 );
 
 router.post(
-  "/",
+  '/',
   celebrate({
     headers: Joi.object()
       .keys({
@@ -46,9 +46,9 @@ router.post(
       .unknown(true),
     body: Joi.object().keys({
       name: Joi.string().required().min(2).max(30),
-      // eslint-disable-next-line no-useless-escape
       link: Joi.string()
         .required()
+        // eslint-disable-next-line no-useless-escape
         .pattern(/https?:\/\/[a-zA-Z0-9\/.\-]+\.+[a-zA-Z0-9\/.-]+#?/),
     }),
   }),

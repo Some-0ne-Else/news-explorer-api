@@ -1,10 +1,10 @@
-const router = require("express").Router();
-const { celebrate, Joi } = require("celebrate");
-const auth = require("../middlewares/auth");
-const { getUserById } = require("../controllers/users");
+const router = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
+const auth = require('../middlewares/auth');
+const { getUserById } = require('../controllers/users');
 
 router.get(
-  "/:id",
+  '/:id',
   celebrate({
     headers: Joi.object()
       .keys({

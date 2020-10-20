@@ -1,23 +1,23 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../models/user");
-const NotFoundError = require("../errors/not-found-err");
-const BadRequestError = require("../errors/bad-request-err");
-const ConflictError = require("../errors/conflict-err");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
+const NotFoundError = require('../errors/not-found-err');
+const BadRequestError = require('../errors/bad-request-err');
+const ConflictError = require('../errors/conflict-err');
 
-const { JWT_SECRET = "yandex-praktikum-key" } = process.env;
+const { JWT_SECRET = 'yandex-praktikum-key' } = process.env;
 
 module.exports.getUserById = (req, res, next) => {
   User.findById(req.params.id)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError("Нет пользователя с таким id");
+        throw new NotFoundError('Нет пользователя с таким id');
       }
       return res.send({ data: user });
     })
     .catch((err) => {
-      if (err.name === "CastError") {
-        throw new BadRequestError("Ошибка в переданных данных");
+      if (err.name === 'CastError') {
+        throw new BadRequestError('Ошибка в переданных данных');
       }
       next(err);
     })
@@ -48,7 +48,7 @@ module.exports.createUser = (req, res, next) => {
             `Пользователь с таким email уже зарегистрирован: ${err.message}`
           );
         }
-        if (err.name === "ValidationError") {
+        if (err.name === 'ValidationError') {
           throw new BadRequestError(
             `Переданы некорректные данные: ${err.message}`
           );
@@ -63,7 +63,7 @@ module.exports.login = (req, res, next) => {
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
-        expiresIn: "7d",
+        expiresIn: '7d',
       });
       res.send({ token });
     })
