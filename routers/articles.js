@@ -17,7 +17,7 @@ router.get(
       .unknown(true),
   }),
   auth,
-  getArticles
+  getArticles,
 );
 
 router.delete(
@@ -33,7 +33,7 @@ router.delete(
     }),
   }),
   auth,
-  deleteArticle
+  deleteArticle,
 );
 
 router.post(
@@ -53,7 +53,7 @@ router.post(
     }),
   }),
   auth,
-  addArticle
+  addArticle,
 );
 
 module.exports = router;

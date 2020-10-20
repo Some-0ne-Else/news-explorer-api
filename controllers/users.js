@@ -40,17 +40,17 @@ module.exports.createUser = (req, res, next) => {
           about,
           avatar,
           email,
-        })
+        }),
       )
       .catch((err) => {
         if (err.code === 11000) {
           throw new ConflictError(
-            `Пользователь с таким email уже зарегистрирован: ${err.message}`
+            `Пользователь с таким email уже зарегистрирован: ${err.message}`,
           );
         }
         if (err.name === 'ValidationError') {
           throw new BadRequestError(
-            `Переданы некорректные данные: ${err.message}`
+            `Переданы некорректные данные: ${err.message}`,
           );
         }
         throw new Error();

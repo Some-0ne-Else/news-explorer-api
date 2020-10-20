@@ -13,7 +13,7 @@ router.get(
       .unknown(true),
   }),
   auth,
-  getUserById
+  getUserById,
 );
 
 module.exports = router;

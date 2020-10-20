@@ -31,7 +31,7 @@ app.post(
       name: Joi.string().required().min(2).max(30),
     }),
   }),
-  createUser
+  createUser,
 );
 
 app.post(
@@ -42,7 +42,7 @@ app.post(
       password: Joi.string().required(),
     }),
   }),
-  login
+  login,
 );
 
 /* check urls */

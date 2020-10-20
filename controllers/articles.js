@@ -18,7 +18,7 @@ module.exports.deleteArticle = (req, res, next) => {
 
       if (article.owner.toString() === req.user._id) {
         return Article.findByIdAndRemove(req.params.id).then((a) =>
-          res.send({ data: a })
+          res.send({ data: a }),
         );
       }
       throw new ForbiddenError('Статья принадлежит другому пользователю');
@@ -48,7 +48,7 @@ module.exports.addArticle = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError(
-          `Переданы некорректные данные: ${err.message}`
+          `Переданы некорректные данные: ${err.message}`,
         );
       }
     })
