@@ -4,9 +4,7 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const articleRouter = require('./routers/articles');
-const usersRouter = require('./routers/users');
-const errorRouter = require('./routers/error');
+const { articleRouter, usersRouter, errorRouter } = require('./routers');
 const errorHandler = require('./middlewares/error-handler.js');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const {
