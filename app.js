@@ -21,6 +21,7 @@ const limiter = rateLimit({
 
 const app = express();
 app.use(helmet());
+app.set('trust proxy', 1);
 app.use(limiter);
 mongoose.connect(`mongodb://${DB_SERVER}:${DB_PORT}/${DB_NAME}`, {
   useNewUrlParser: true,
