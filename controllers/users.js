@@ -6,7 +6,6 @@ const ConflictError = require('../errors/conflict-err');
 
 const { JWT_SECRET = 'yandex-praktikum-key' } = process.env;
 
-
 module.exports.getUserInfo = (req, res, next) => {
   const userId = req.user._id;
   User.find({ _id: userId })
