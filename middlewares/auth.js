@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const UnauthorizedError = require('../errors/unauthorized-err');
-
-const { JWT_SECRET = 'yandex-praktikum-key' } = process.env;
+const { JWT_SECRET } = require('../utils/config');
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
