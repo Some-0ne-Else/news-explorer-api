@@ -3,6 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { errors } = require('celebrate');
 const { articleRouter, usersRouter, errorRouter } = require('./routers');
 const errorHandler = require('./middlewares/error-handler.js');
@@ -12,7 +13,19 @@ const {
 } = require('./utils/config');
 const { limiter } = require('./utils/rate-limiter-config');
 
+const whitelist = ['https://some0neelse.tk', 'http://some0neelse.tk', 'http://localhost:3001'];
+const corsOptions = {
+  origin(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
 const app = express();
+app.use(cors(corsOptions));
 app.use(helmet());
 app.use(limiter);
 mongoose.connect(`mongodb://${DB_SERVER}:${DB_PORT}/${DB_NAME}`, {
